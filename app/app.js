@@ -7,13 +7,14 @@ import ngMaterial from 'angular-material';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 import rootComponent from './root';
-
+import messagesComponent from './messages/messages.component';
 
 require('angular-material/angular-material.css');
 
 angular.module('myanmarApp', [
   ngCookies, ngResource, ngSanitize, ngAnimate, ngMaterial
-]).component('root', rootComponent);
+]).component('root', rootComponent)
+    .component('messages', messagesComponent);
 
 angular.element(document)
     .ready(() => {
