@@ -13,6 +13,9 @@ class RumorController {
       this.sortRumors();
       this.loadingRumors = false;
     });
+    this.rumorService.addListener(() => {
+      this.onNewRumors();
+    });
   }
 
   sortRumors() {
@@ -24,6 +27,15 @@ class RumorController {
 
   showChat() {
     this.$mdSidenav('message-sidenav').toggle();
+  }
+
+  onNewRumors() {
+    this.loadingRumors = false;
+    this.rumorService.getRumors().then(rumors => {
+      this.rumors = [...rumors];  
+      this.sortRumors();
+      this.loadingRumors = false;
+    });
   }
 
   upvote(rumor) {

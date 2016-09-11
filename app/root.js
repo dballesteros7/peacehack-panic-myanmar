@@ -4,9 +4,10 @@ const template = require('./root.html');
 const dialogTemplate = require('./rumors/rumor-creator.html');
 
 class RootController {
-  constructor($mdSidenav, $mdDialog) {
+  constructor($mdSidenav, $mdDialog, rumorService) {
     this.$mdSidenav = $mdSidenav;
     this.$mdDialog = $mdDialog;
+    this.rumorService = rumorService;
   }
 
   onMessageClick() {
@@ -19,10 +20,12 @@ class RootController {
       controller: RumorCreatorController,
       controllerAs: '$ctrl',
       targetEvent: evt
+    }).then(rumor => {
+      this.rumorService.registerRumor(rumor);
     })
   }
 }
-RootController.$inject = ['$mdSidenav', '$mdDialog'];
+RootController.$inject = ['$mdSidenav', '$mdDialog', 'rumorService'];
 
 const rootComponent = {
   controller: RootController,

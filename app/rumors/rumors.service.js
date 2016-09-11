@@ -1,6 +1,9 @@
 class RumorService {
 
   constructor($http, $q) {
+    this.$http = $http;
+    this.$q = $q;
+
     this.rumors = [
       {
         name: 'issueNoMore',
@@ -27,12 +30,26 @@ class RumorService {
         downvotes: 0
       },
     ];
-    this.$http = $http;
-    this.$q = $q;
+    this.listeners = [];
   }
 
   getRumors() {
     return this.$q.when(this.rumors);
+  }
+
+  registerRumor(rumor) {
+    this.rumors.push({
+      headline: rumor.title,
+      description: rumor.description,
+      img: rumor.link,
+      upvotes: 0,
+      downvotes: 0
+    });
+    this.listeners.forEach(listener => listener());
+  }
+
+  addListener(listener) {
+    this.listeners.push(listener);
   }
 }
 RumorService.$inject = ['$http', '$q'];
