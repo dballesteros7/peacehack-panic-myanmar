@@ -8,10 +8,8 @@ class RumorController {
 
     this.loadingRumors = true;
     this.rumors = null;
-    this.rumorService.getRumors().then(rumors => {
-      this.rumors = [...rumors];
-      this.sortRumors();
-      this.loadingRumors = false;
+    this.rumorService.initPromise.then(() => {
+      this.onNewRumors();
     });
     this.rumorService.addListener(() => {
       this.onNewRumors();
@@ -30,12 +28,9 @@ class RumorController {
   }
 
   onNewRumors() {
+    this.rumors = this.rumorService.getRumors();
+    this.sortRumors();
     this.loadingRumors = false;
-    this.rumorService.getRumors().then(rumors => {
-      this.rumors = [...rumors];
-      this.sortRumors();
-      this.loadingRumors = false;
-    });
   }
 
   upvote(rumor) {

@@ -4,37 +4,27 @@ class RumorService {
     this.$http = $http;
     this.$q = $q;
 
-    this.rumors = [
-      {
-        name: 'issueNoMore',
-        headline: 'no more issues',
-        description: 't is a long established fact that its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of le',
-        img: 'https://pbs.twimg.com/media/BqyHXLkCQAEE2hf.jpg',
-        upvotes: 2,
-        downvotes: 10
-      },
-      {
-        name: 'allGood',
-        headline: 'space doge',
-        description: 'a reader will be distracted by the readable content of a page when looking at  web page editors now use Lorem Ipsum as their default model text, and a search for  w',
-        img: 'http://3.bp.blogspot.com/-QqheUg055tQ/Uf8wD31JGgI/AAAAAAAAMeI/ofX2pHN2SNA/s1600/4063_o_laika.jpg',
-        upvotes: 5,
-        downvotes: 3
-      },
-      {
-        name: 'rainbowDoge',
-        headline: 'dogs are rainbow',
-        description: 'tters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages andill uncover many web sites still in their infancy. tters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages andill uncover many web sites still in their infancy. ',
-        img: 'https://s-media-cache-ak0.pinimg.com/564x/41/22/b8/4122b85abfaaf6b2b607dda5fe4d4d23.jpg',
-        upvotes: 1,
-        downvotes: 0
-      },
-    ];
+    this.rumors = [];
+    const deffered = this.$q.defer();
+    this.initPromise = deffered.promise;
+    this.ref = firebase.database().ref('rumors');
+    this.ref.on('value', (dataSnapshot) => {
+      const rumors = [];
+      dataSnapshot.forEach(child => {
+        rumors.push(child.val());
+      });
+      this.rumors = rumors;
+      deffered.resolve();
+    });
+    this.ref.on('child_added', datum => {
+      this.rumors.push(datum.val());
+      this.notifyListeners();
+    });
     this.listeners = [];
   }
 
   getRumors() {
-    return this.$q.when(this.rumors);
+    return this.rumors;
   }
 
   registerRumor(rumor) {
@@ -47,9 +37,11 @@ class RumorService {
       downvotes: 0,
       city: rumor.city,
       country: rumor.country
-    }).then(() => {
-      this.listeners.forEach(listener => listener());
     });
+  }
+
+  notifyListeners() {
+    this.listeners.forEach(listener => listener());
   }
 
   addListener(listener) {
