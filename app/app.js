@@ -8,13 +8,17 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 import rootComponent from './root';
 import messagesComponent from './messages/messages.component';
+import MessageService from './messages/messages.service';
 
 require('angular-material/angular-material.css');
 
 angular.module('myanmarApp', [
   ngCookies, ngResource, ngSanitize, ngAnimate, ngMaterial
 ]).component('root', rootComponent)
-    .component('messages', messagesComponent);
+    .component('messages', messagesComponent)
+    .service('messageService', MessageService);
+
+
 
 angular.element(document)
     .ready(() => {

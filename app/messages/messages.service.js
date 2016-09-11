@@ -11,3 +11,5 @@ class MessageService {
   }
 }
 MessageService.$inject = ['$http', '$q'];
+
+export default MessageService;
