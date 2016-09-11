@@ -12,7 +12,8 @@
       <md-progress-circular ng-disabled="!$ctrl.loadingMessages">
       </md-progress-circular>
     </div>
-    <md-content ng-hide="$ctrl.loadingMessages" flex layout="row">
+    <md-content ng-hide="$ctrl.loadingMessages || $ctrl.errorMessage" flex
+                layout="row">
       <md-list flex>
         <md-list-item ng-repeat="message in $ctrl.messages">
           <img class="md-avatar" ng-src="{{message.img}}">
@@ -22,13 +23,27 @@
         </md-list-item>
       </md-list>
     </md-content>
-    <form ng-hide="$ctrl.loadingMessages"
+    <div ng-show="$ctrl.errorMessage"
+         class="md-whiteframe-z1"
+         style="align-self: center; margin: auto;
+                background-color: #D50000;
+                color: #FFF;
+                border-radius: 2px; padding: 8px;">
+      <h3>
+        <md-icon style="color: #FFF" class="material-icons">
+          error
+        </md-icon>
+        Error
+      </h3>
+      <p>{{$ctrl.errorMessage}}</p>
+    </div>
+    <form ng-hide="$ctrl.loadingMessages || $ctrl.errorMessage"
           layout="row" flex="none"
           style="padding: 8px;">
       <md-input-container flex>
-        <input placeholder="Send a message...">
+        <input placeholder="Send a message..." ng-model="$ctrl.inputMessage">
       </md-input-container>
-      <md-button class="md-fab">
+      <md-button class="md-fab" type="submit" ng-click="$ctrl.submitMessage()">
         <md-icon class="material-icons">
           send
         </md-icon>

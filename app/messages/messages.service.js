@@ -6,7 +6,7 @@ class MessageService {
   getMessages() {
     return this.$http({
       method: 'GET',
-      url: 'https://fde42075.ngrok.io/api/messages'
+      url: 'https://1ae3d400.ngrok.io/api/messages'
     }).then(httpData => httpData.data);
   }
 }

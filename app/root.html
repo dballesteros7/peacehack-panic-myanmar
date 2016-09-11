@@ -19,10 +19,12 @@
         </md-button>
       </div>
     </md-toolbar>
-    <md-content flex></md-content>
+    <md-content flex layout="row">
+      <rumors flex layout="row"></rumors>
+    </md-content>
   </div>
   <md-sidenav md-component-id="message-sidenav" class="md-sidenav-right"
-              layout="row" md-is-locked-open="true">
+              layout="row">
     <messages layout="row" flex></messages>
   </md-sidenav>
 </div>
