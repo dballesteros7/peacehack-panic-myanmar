@@ -38,14 +38,18 @@ class RumorService {
   }
 
   registerRumor(rumor) {
-    this.rumors.push({
+    const newKey = firebase.database().ref().child('rumors').push().key;
+    firebase.database().ref(`rumors/${newKey}`).set({
       headline: rumor.title,
       description: rumor.description,
       img: rumor.link,
       upvotes: 0,
-      downvotes: 0
+      downvotes: 0,
+      city: rumor.city,
+      country: rumor.country
+    }).then(() => {
+      this.listeners.forEach(listener => listener());
     });
-    this.listeners.forEach(listener => listener());
   }
 
   addListener(listener) {

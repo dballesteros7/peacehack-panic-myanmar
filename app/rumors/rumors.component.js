@@ -32,7 +32,7 @@ class RumorController {
   onNewRumors() {
     this.loadingRumors = false;
     this.rumorService.getRumors().then(rumors => {
-      this.rumors = [...rumors];  
+      this.rumors = [...rumors];
       this.sortRumors();
       this.loadingRumors = false;
     });
