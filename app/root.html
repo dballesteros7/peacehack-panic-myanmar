@@ -19,8 +19,15 @@
         </md-button>
       </div>
     </md-toolbar>
-    <md-content flex layout="row">
+    <md-content flex layout="row" style="position: relative;">
       <rumors flex layout="row"></rumors>
+      <div id="fab-container">
+        <md-button class="md-fab" ng-click="$ctrl.openCreateDialog($event)">
+          <md-icon class="material-icons">
+            add
+          </md-icon>
+        </md-button>
+      </div>
     </md-content>
   </div>
   <md-sidenav md-component-id="message-sidenav" class="md-sidenav-right"

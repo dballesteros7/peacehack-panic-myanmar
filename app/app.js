@@ -1,5 +1,6 @@
 import angular from 'angular';
 import ngAnimate from 'angular-animate';
+import ngMessages from 'angular-messages';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
@@ -15,7 +16,7 @@ import RumorService from './rumors/rumors.service';
 require('angular-material/angular-material.css');
 
 angular.module('myanmarApp', [
-  ngCookies, ngResource, ngSanitize, ngAnimate, ngMaterial
+  ngCookies, ngResource, ngSanitize, ngAnimate, ngMaterial, ngMessages
 ]).component('root', rootComponent)
     .component('messages', messagesComponent)
     .component('rumors', rumorComponent)
