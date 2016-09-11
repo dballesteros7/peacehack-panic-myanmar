@@ -8,9 +8,6 @@ class RumorController {
 
     this.loadingRumors = true;
     this.rumors = null;
-    this.rumorService.initPromise.then(() => {
-      this.onNewRumors();
-    });
     this.rumorService.addListener(() => {
       this.onNewRumors();
     });

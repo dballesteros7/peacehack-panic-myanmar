@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: `${__dirname}/build/`,
     filename: 'bundle.js',
-    publicPath: '/build/'
+    publicPath: './'
   },
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.js', '.css', '.html', '.json']

@@ -8,14 +8,14 @@ class RumorService {
     const deffered = this.$q.defer();
     this.initPromise = deffered.promise;
     this.ref = firebase.database().ref('rumors');
-    this.ref.on('value', (dataSnapshot) => {
-      const rumors = [];
-      dataSnapshot.forEach(child => {
-        rumors.push(child.val());
-      });
-      this.rumors = rumors;
-      deffered.resolve();
-    });
+    // this.ref.on('value', (dataSnapshot) => {
+    //   const rumors = [];
+    //   dataSnapshot.forEach(child => {
+    //     rumors.push(child.val());
+    //   });
+    //   this.rumors = rumors;
+    //   deffered.resolve();
+    // });
     this.ref.on('child_added', datum => {
       this.rumors.push(datum.val());
       this.notifyListeners();
@@ -29,7 +29,7 @@ class RumorService {
 
   registerRumor(rumor) {
     const newKey = firebase.database().ref().child('rumors').push().key;
-    firebase.database().ref(`rumors/${newKey}`).set({
+    this.ref.set({
       headline: rumor.title,
       description: rumor.description,
       img: rumor.link,
