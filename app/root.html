@@ -1,0 +1,27 @@
+<div layout="row" flex>
+  <md-sidenav></md-sidenav>
+  <div layout="column" flex>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button">
+          <md-icon class="material-icons">
+            menu
+          </md-icon>
+        </md-button>
+        <h2>
+          <span>Myanmar reports</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="$ctrl.onMessageClick()">
+          <md-icon class="material-icons">
+            message
+          </md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-content flex></md-content>
+  </div>
+  <md-sidenav md-component-id="message-sidenav" class="md-sidenav-right">
+
+  </md-sidenav>
+</div>
