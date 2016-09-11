@@ -15,6 +15,10 @@
     <md-content ng-hide="$ctrl.loadingMessages" flex layout="row">
       <md-list flex>
         <md-list-item ng-repeat="message in $ctrl.messages">
+          <img class="md-avatar" ng-src="{{message.img}}">
+          <div class="md-list-item-text">
+            <p>{{message.text}}</p>
+          </div>
         </md-list-item>
       </md-list>
     </md-content>
@@ -22,9 +26,13 @@
           layout="row" flex="none"
           style="padding: 8px;">
       <md-input-container flex>
-        <textarea placeholder="Say something...">
-          </textarea>
+        <input placeholder="Send a message...">
       </md-input-container>
+      <md-button class="md-fab">
+        <md-icon class="material-icons">
+          send
+        </md-icon>
+      </md-button>
     </form>
   </div>
 </div>

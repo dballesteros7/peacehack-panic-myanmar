@@ -5,10 +5,10 @@ class MessageController {
   constructor(messageService) {
     this.messageService = messageService;
     this.messages = [];
-    this.loadingMessages = false;
+    this.loadingMessages = true;
     this.messageService.getMessages().then((messages) => {
-      console.log(messages);
       this.messages = messages;
+      this.loadingMessages = false;
     })
   }
 
