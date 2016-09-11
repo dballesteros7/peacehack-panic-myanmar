@@ -1,13 +1,13 @@
 class MessageService {
   constructor($http, $q) {
     this.$http = $http;
-    this.$q = $q;
   }
 
   getMessages() {
-    return $q.when([
-
-    ]);
+    return this.$http({
+      method: 'GET',
+      url: 'https://fde42075.ngrok.io/api/messages'
+    }).then(httpData => httpData.data);
   }
 }
 MessageService.$inject = ['$http', '$q'];

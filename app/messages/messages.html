@@ -6,7 +6,25 @@
         </span>
     </div>
   </md-toolbar>
-  <md-content flex>
-
-  </md-content>
+  <div flex layout="column">
+    <div style="margin: auto; align-self: center"
+         ng-show="$ctrl.loadingMessages">
+      <md-progress-circular ng-disabled="!$ctrl.loadingMessages">
+      </md-progress-circular>
+    </div>
+    <md-content ng-hide="$ctrl.loadingMessages" flex layout="row">
+      <md-list flex>
+        <md-list-item ng-repeat="message in $ctrl.messages">
+        </md-list-item>
+      </md-list>
+    </md-content>
+    <form ng-hide="$ctrl.loadingMessages"
+          layout="row" flex="none"
+          style="padding: 8px;">
+      <md-input-container flex>
+        <textarea placeholder="Say something...">
+          </textarea>
+      </md-input-container>
+    </form>
+  </div>
 </div>
